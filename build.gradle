@@ -1,0 +1,45 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '4.1.1'
+    id 'io.spring.dependency-management' version '1.1.7'
+}
+
+group = 'com.business'
+version = '0.0.1-SNAPSHOT'
+description = 'twitter'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-webmvc'
+    testImplementation 'org.springframework.boot:spring-boot-starter-webmvc-test'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+    // Import Lombok
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+
+    // Includes Jakarta Persistence API and Hibernate
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+    // Validate Request
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+    // DB Connection
+    runtimeOnly 'org.postgresql:postgresql'
+
+    // Official Spring Cloud AWS Starter for S3 (with standard v2 SDK)
+    implementation 'io.awspring.cloud:spring-cloud-aws-starter-s3:4.0.0'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
